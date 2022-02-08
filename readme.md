@@ -1,0 +1,3 @@
+- [x] eureka 示例
+  - [x] eureka 注册，客户端，消费端
+  - [x] eureka 高可用
