@@ -9,6 +9,6 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false #是否拉取服务列表
-  server:
-    enable-self-preservation: false # 强制关闭服务自保（自动开关不起作用）
-    eviction-interval-timer-in-ms: 10000 # 每隔多久触发一次服务剔除
+#  server:
+#    enable-self-preservation: false # 强制关闭服务自保（自动开关不起作用）
+#    eviction-interval-timer-in-ms: 10000 # 每隔多久触发一次服务剔除
