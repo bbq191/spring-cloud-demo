@@ -2,3 +2,4 @@
     - [x] eureka 注册，客户端，消费端
     - [x] eureka 高可用
 - [x] ribbon 示例
+    - [x] IRule 实现一致性哈希策略
