@@ -17,6 +17,7 @@
     <module>ribbon/ribbon-consumer</module>
     <module>feign/feign-consumer</module>
     <module>feign/feign-client-interface</module>
+    <module>feign/feign-client</module>
   </modules>
 
   <dependencyManagement>
