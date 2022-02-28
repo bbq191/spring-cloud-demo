@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-/** @author afu */
+/**
+ * @author afu
+ */
 @FeignClient("feign-client")
 public interface IService {
   @GetMapping("/sayHi")

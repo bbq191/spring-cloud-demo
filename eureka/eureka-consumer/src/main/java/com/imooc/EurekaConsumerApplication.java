@@ -7,7 +7,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-/** @author afu */
+/**
+ * @author afu
+ */
 @SpringBootApplication
 @EnableEurekaClient
 public class EurekaConsumerApplication {

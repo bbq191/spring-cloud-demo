@@ -6,7 +6,9 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/** @author afu */
+/**
+ * @author afu
+ */
 @Configuration
 @RibbonClient(name = "eureka-client", configuration = MyRule.class)
 public class RibbonConfiguration {

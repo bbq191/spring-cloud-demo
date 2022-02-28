@@ -17,7 +17,9 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-/** @author afu */
+/**
+ * @author afu
+ */
 @NoArgsConstructor
 public class MyRule extends AbstractLoadBalancerRule implements IRule {
 

@@ -18,6 +18,7 @@
     <module>feign/feign-consumer</module>
     <module>feign/feign-client-interface</module>
     <module>feign/feign-client</module>
+    <module>feign/feign-consumer-advance</module>
   </modules>
 
   <dependencyManagement>
