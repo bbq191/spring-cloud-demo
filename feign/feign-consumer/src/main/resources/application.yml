@@ -8,3 +8,11 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:10001/eureka
+
+feign-client:
+  ribbon:
+    MaxAutoRetries: 2     # 每台机器最大重试次数
+    MaxAutoRetriesNextServer: 2    # 可以再重试几台机器
+    ConnectTimeout: 1000    # 连接超时
+    ReadTimeout: 2000    # 业务处理超时
+    OkToRetryOnAllOperations: true    # 在所有HTTP Method进行重试
