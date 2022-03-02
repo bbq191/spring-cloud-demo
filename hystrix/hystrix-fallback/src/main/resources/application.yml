@@ -15,7 +15,7 @@ feign:
     enabled: true # 开启feign下的hystrix功能
 
 hystrix:
-  commond:
+  command:
     default:
       fallback:
         enable: true #是否开启服务降级
@@ -24,7 +24,7 @@ hystrix:
           enable: true #全局超时
         isolation:
           thread:
-            timeoutInMilliseconds: 2000 #超时时间
+            timeoutInMilliseconds: 5000 #超时时间
             interruptOnTimeout: true # 超时以后终止线程
             interruptOnFutureCancel: true # 取消的时候终止线程
       requestCache:

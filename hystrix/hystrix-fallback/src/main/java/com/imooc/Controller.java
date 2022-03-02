@@ -1,5 +1,7 @@
 package com.imooc;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
 import lombok.Cleanup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,20 @@ public class Controller {
   @GetMapping("/timeout")
   public String timeout(Integer timeout) {
     return myService.retry(timeout);
+  }
+
+  @GetMapping("/timeout2")
+  @HystrixCommand(
+      fallbackMethod = "timeoutFallback",
+      commandProperties = {
+        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
+      })
+  public String timeout2(Integer timeout) {
+    return myService.retry(timeout);
+  }
+
+  public String timeoutFallback(Integer timeout) {
+    return "success";
   }
 
   @GetMapping("/cache")
