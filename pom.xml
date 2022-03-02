@@ -19,6 +19,7 @@
     <module>feign/feign-client-interface</module>
     <module>feign/feign-client</module>
     <module>feign/feign-consumer-advance</module>
+    <module>hystrix/hystrix-fallback</module>
   </modules>
 
   <dependencyManagement>
