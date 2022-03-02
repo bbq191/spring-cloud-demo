@@ -27,7 +27,8 @@ hystrix:
             timeoutInMilliseconds: 2000 #超时时间
             interruptOnTimeout: true # 超时以后终止线程
             interruptOnFutureCancel: true # 取消的时候终止线程
-
+      requestCache:
+        enable: true
 feign-client:
   ribbon:
     # 每台机器最大重试次数
