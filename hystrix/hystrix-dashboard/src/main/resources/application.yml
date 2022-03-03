@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: hystrix-dashboard
+server:
+  port: 10009
+# 容错监控白名单
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"
+# 监控路径
+# Hystrix监控路径
+# http://localhost:10007/actuator/hystrix.stream
+# Turbine监控路径
+# http://localhost:10008/turbine.stream

@@ -14,7 +14,7 @@ eureka:
 # 指定了所需要监控的服务名
 turbine:
   app-config: hystrix-consumer
-  cluster-name-expression: "default"
+  cluster-name-expression: new String("default")
   # 将端口和hostname作为区分不同服务的条件（默认只使用Host）
   combine-host-port: true
   instanceUrlSuffix:
