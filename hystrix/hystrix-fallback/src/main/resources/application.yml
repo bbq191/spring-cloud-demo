@@ -41,3 +41,14 @@ feign-client:
     ReadTimeout: 8000
     # 在所有HTTP Method进行重试
     OkToRetryOnAllOperations: false
+
+# actuator暴露接口
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    health:
+      show-details: always
