@@ -10,12 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/refresh")
 @RefreshScope
 public class RefreshController {
-
   @Value("${words}")
   private String words;
+
+  @Value("${girl}")
+  private String girl;
 
   @GetMapping("/words")
   public String getWords() {
     return words;
+  }
+
+  @GetMapping("/marry")
+  public String marry() {
+    return "May I marry you, " + girl + "?";
   }
 }
