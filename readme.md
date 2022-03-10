@@ -11,3 +11,5 @@
     - [x] hystrix 示例
         - [x] fallback 降级
         - [x] timeout 降级
+    - [x] config 示例
+    - [x] bus 示例
