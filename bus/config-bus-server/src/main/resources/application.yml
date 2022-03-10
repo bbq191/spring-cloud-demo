@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: config-bus-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/bbq191/config-repo.git
+          force-pull: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+server:
+  port: 10009
