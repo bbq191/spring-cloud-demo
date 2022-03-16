@@ -7,6 +7,13 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+      routes:
+      - id: feignclient
+        uri: lb://FEIGN-CLIENT
+        predicates:
+        - Path=/yml/**
+        filters:
+        - StripPrefix=1
 server:
   port: 10011
 management:
