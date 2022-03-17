@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 @Configuration
 public class GatewayConfiguration {
   @Autowired private TimerFilter timerFilter;
+  @Autowired private AuthFilter authFilter;
 
   @Bean
   @Order
@@ -29,7 +30,8 @@ public class GatewayConfiguration {
                         f ->
                             f.stripPrefix(1)
                                 .addResponseHeader("java-param", "gateway-config")
-                                .filter(timerFilter))
+                                .filter(timerFilter)
+                                .filter(authFilter))
                     .uri("lb://FEIGN-CLIENT"))
         .route(
             r ->
