@@ -13,3 +13,6 @@
         - [x] timeout 降级
     - [x] config 示例
     - [x] bus 示例
+    - [x] gateway 示例
+      - [x] jwt 集成
+      - [x] token 生成、刷新、验证
