@@ -13,9 +13,6 @@ eureka:
     service-url:
       defaultZone: http://localhost:10001/eureka/
 
-logging:
-  file: ${spring.application.name}.log
-
 info:
   app:
     name: auth-service
@@ -31,3 +28,6 @@ management:
   endpoint:
     health:
       show-details: always
+logging:
+  file:
+    name: ${spring.application.name}.log
