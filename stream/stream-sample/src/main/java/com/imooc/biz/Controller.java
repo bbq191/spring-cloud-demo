@@ -1,5 +1,6 @@
 package com.imooc.biz;
 
+import com.imooc.topic.GroupTopic;
 import com.imooc.topic.MyTopic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
   @Autowired private MyTopic producer;
+  @Autowired private GroupTopic groupTopicProducer;
 
   // 简单广播消息
   @PostMapping("send")
   public void sendMessage(@RequestParam(value = "body") String body) {
     producer.output().send(MessageBuilder.withPayload(body).build());
+  }
+  // 消息分组和消息分区
+  @PostMapping("sendToGroup")
+  public void sendMessageToGroup(@RequestParam(value = "body") String body) {
+    groupTopicProducer.output().send(MessageBuilder.withPayload(body).build());
   }
 }

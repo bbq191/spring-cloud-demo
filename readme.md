@@ -20,3 +20,5 @@
         - [x] AB 模块如何追踪调用链路
         - [x] zipkin-server 集成
     - [ ] stream 示例
+      - [x] 自定义topic
+      - [x] 消费分组，消费分区
