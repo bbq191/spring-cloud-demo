@@ -16,6 +16,7 @@
     - [x] gateway 示例
         - [x] jwt 集成
         - [x] token 生成、刷新、验证
-    - [ ] sleuth 示例
+    - [x] sleuth 示例
         - [x] AB 模块如何追踪调用链路
         - [x] zipkin-server 集成
+    - [ ] stream 示例
