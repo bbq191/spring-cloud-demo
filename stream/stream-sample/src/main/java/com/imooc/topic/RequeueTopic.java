@@ -6,13 +6,12 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
 public interface RequeueTopic {
-    String INPUT = "requeue-consumer";
-    String OUTPUT = "requeue-producer";
+  String INPUT = "requeue-consumer";
+  String OUTPUT = "requeue-producer";
 
-    @Input(INPUT)
-    SubscribableChannel input();
+  @Input(INPUT)
+  SubscribableChannel input();
 
-    @Output(OUTPUT)
-    MessageChannel output();
-
+  @Output(OUTPUT)
+  MessageChannel output();
 }

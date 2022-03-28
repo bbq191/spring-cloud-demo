@@ -5,9 +5,9 @@ import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface DelayedTopic {
-  String INPUT = "delayed-consumer";
-  String OUTPUT = "delayed-producer";
+public interface FallbackTopic {
+  String INPUT = "fallback-consumer";
+  String OUTPUT = "fallback-producer";
 
   @Input(INPUT)
   SubscribableChannel input();

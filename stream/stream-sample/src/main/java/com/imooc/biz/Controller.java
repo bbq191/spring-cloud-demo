@@ -3,6 +3,7 @@ package com.imooc.biz;
 import com.imooc.topic.DelayedTopic;
 import com.imooc.topic.DlqTopic;
 import com.imooc.topic.ErrorTopic;
+import com.imooc.topic.FallbackTopic;
 import com.imooc.topic.GroupTopic;
 import com.imooc.topic.MyTopic;
 import com.imooc.topic.RequeueTopic;
@@ -22,6 +23,8 @@ public class Controller {
   @Autowired private ErrorTopic errorTopicProducer;
   @Autowired private RequeueTopic requeueTopicProducer;
   @Autowired private DlqTopic dlqTopicProducer;
+  @Autowired private FallbackTopic fallbackTopicProducer;
+
   // 简单广播消息
   @PostMapping("send")
   public void sendMessage(@RequestParam(value = "body") String body) {
@@ -69,5 +72,17 @@ public class Controller {
     MessageBean msg = new MessageBean();
     msg.setPayload(body);
     dlqTopicProducer.output().send(MessageBuilder.withPayload(msg).build());
+  }
+
+  // fallback + 升版
+  @PostMapping("fallback")
+  public void sendMessageToFallback(
+      @RequestParam(value = "body") String body,
+      @RequestParam(value = "version", defaultValue = "1.0") String version) {
+    MessageBean msg = new MessageBean();
+    msg.setPayload(body);
+    fallbackTopicProducer
+        .output()
+        .send(MessageBuilder.withPayload(msg).setHeader("version", version).build());
   }
 }
