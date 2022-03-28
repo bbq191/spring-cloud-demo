@@ -1,6 +1,7 @@
 package com.imooc.biz;
 
 import com.imooc.topic.DelayedTopic;
+import com.imooc.topic.ErrorTopic;
 import com.imooc.topic.GroupTopic;
 import com.imooc.topic.MyTopic;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ public class Controller {
   @Autowired private MyTopic producer;
   @Autowired private GroupTopic groupTopicProducer;
   @Autowired private DelayedTopic delayedTopicProducer;
-
+  @Autowired private ErrorTopic errorTopicProducer;
   // 简单广播消息
   @PostMapping("send")
   public void sendMessage(@RequestParam(value = "body") String body) {
@@ -41,5 +42,13 @@ public class Controller {
     delayedTopicProducer
         .output()
         .send(MessageBuilder.withPayload(msg).setHeader("x-delay", seconds * 1000).build());
+  }
+
+  // 异常重试（单机版）
+  @PostMapping("sendError")
+  public void sendErrorMessage(@RequestParam(value = "body") String body) {
+    MessageBean msg = new MessageBean();
+    msg.setPayload(body);
+    errorTopicProducer.output().send(MessageBuilder.withPayload(msg).build());
   }
 }

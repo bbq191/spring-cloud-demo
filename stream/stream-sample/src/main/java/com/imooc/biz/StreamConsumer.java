@@ -1,16 +1,20 @@
 package com.imooc.biz;
 
 import com.imooc.topic.DelayedTopic;
+import com.imooc.topic.ErrorTopic;
 import com.imooc.topic.GroupTopic;
 import com.imooc.topic.MyTopic;
+import java.util.concurrent.atomic.AtomicInteger;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
 
 @Slf4j
-@EnableBinding(value = {Sink.class, MyTopic.class, GroupTopic.class, DelayedTopic.class})
+@EnableBinding(
+    value = {Sink.class, MyTopic.class, GroupTopic.class, DelayedTopic.class, ErrorTopic.class})
 public class StreamConsumer {
+  private final AtomicInteger count = new AtomicInteger(1);
 
   @StreamListener(Sink.INPUT)
   public void consume(Object payload) {
@@ -33,5 +37,19 @@ public class StreamConsumer {
   @StreamListener(DelayedTopic.INPUT)
   public void consumeDelayedMessage(MessageBean bean) {
     log.info("Delayed message consumed successfully, payload={}", bean.getPayload());
+  }
+
+  // 异常重试（单机版）
+  @StreamListener(ErrorTopic.INPUT)
+  public void consumeErrorMessage(MessageBean bean) {
+    log.info("Are you OK?");
+
+    if (count.incrementAndGet() % 3 == 0) {
+      log.info("Fine, thank you. And you?");
+      count.set(0);
+    } else {
+      log.info("What's your problem?");
+      throw new RuntimeException("I'm not OK");
+    }
   }
 }
