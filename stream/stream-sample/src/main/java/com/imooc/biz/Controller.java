@@ -4,6 +4,7 @@ import com.imooc.topic.DelayedTopic;
 import com.imooc.topic.ErrorTopic;
 import com.imooc.topic.GroupTopic;
 import com.imooc.topic.MyTopic;
+import com.imooc.topic.RequeueTopic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.support.MessageBuilder;
@@ -19,6 +20,8 @@ public class Controller {
   @Autowired private GroupTopic groupTopicProducer;
   @Autowired private DelayedTopic delayedTopicProducer;
   @Autowired private ErrorTopic errorTopicProducer;
+      @Autowired
+    private RequeueTopic requeueTopicProducer;
   // 简单广播消息
   @PostMapping("send")
   public void sendMessage(@RequestParam(value = "body") String body) {
@@ -51,4 +54,12 @@ public class Controller {
     msg.setPayload(body);
     errorTopicProducer.output().send(MessageBuilder.withPayload(msg).build());
   }
+
+      // 异常重试（联机版 - 重新入列）
+    @PostMapping("requeue")
+    public void sendErrorMessageToMQ(@RequestParam(value = "body") String body) {
+        MessageBean msg = new MessageBean();
+        msg.setPayload(body);
+        requeueTopicProducer.output().send(MessageBuilder.withPayload(msg).build());
+    }
 }
