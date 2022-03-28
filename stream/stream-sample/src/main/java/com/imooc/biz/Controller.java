@@ -1,5 +1,6 @@
 package com.imooc.biz;
 
+import com.imooc.topic.DelayedTopic;
 import com.imooc.topic.GroupTopic;
 import com.imooc.topic.MyTopic;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ public class Controller {
 
   @Autowired private MyTopic producer;
   @Autowired private GroupTopic groupTopicProducer;
+  @Autowired private DelayedTopic delayedTopicProducer;
 
   // 简单广播消息
   @PostMapping("send")
@@ -25,5 +27,19 @@ public class Controller {
   @PostMapping("sendToGroup")
   public void sendMessageToGroup(@RequestParam(value = "body") String body) {
     groupTopicProducer.output().send(MessageBuilder.withPayload(body).build());
+  }
+
+  // 延迟消息
+  @PostMapping("sendDM")
+  public void sendDelayedMessage(
+      @RequestParam(value = "body") String body, @RequestParam(value = "seconds") Integer seconds) {
+
+    MessageBean msg = new MessageBean();
+    msg.setPayload(body);
+
+    log.info("ready to send delayed message");
+    delayedTopicProducer
+        .output()
+        .send(MessageBuilder.withPayload(msg).setHeader("x-delay", seconds * 1000).build());
   }
 }
