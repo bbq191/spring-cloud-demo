@@ -1,6 +1,7 @@
 package com.imooc.biz;
 
 import com.imooc.topic.DelayedTopic;
+import com.imooc.topic.DlqTopic;
 import com.imooc.topic.ErrorTopic;
 import com.imooc.topic.GroupTopic;
 import com.imooc.topic.MyTopic;
@@ -19,7 +20,8 @@ import org.springframework.cloud.stream.messaging.Sink;
       GroupTopic.class,
       DelayedTopic.class,
       ErrorTopic.class,
-      RequeueTopic.class
+      RequeueTopic.class,
+      DlqTopic.class
     })
 public class StreamConsumer {
   private final AtomicInteger count = new AtomicInteger(1);
@@ -70,5 +72,17 @@ public class StreamConsumer {
     } catch (Exception e) {
     }
     throw new RuntimeException("I'm not OK");
+  }
+
+  // 死信队列
+  @StreamListener(DlqTopic.INPUT)
+  public void consumeDlqMessage(MessageBean bean) {
+    log.info("Dlq - Are you OK?");
+    if (count.incrementAndGet() % 3 == 0) {
+      log.info("Dlq - Fine, thank you. And you?");
+    } else {
+      log.info("Dlq - What's your problem?");
+      throw new RuntimeException("I'm not OK");
+    }
   }
 }

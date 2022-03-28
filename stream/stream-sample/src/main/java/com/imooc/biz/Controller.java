@@ -1,6 +1,7 @@
 package com.imooc.biz;
 
 import com.imooc.topic.DelayedTopic;
+import com.imooc.topic.DlqTopic;
 import com.imooc.topic.ErrorTopic;
 import com.imooc.topic.GroupTopic;
 import com.imooc.topic.MyTopic;
@@ -15,13 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 public class Controller {
-
   @Autowired private MyTopic producer;
   @Autowired private GroupTopic groupTopicProducer;
   @Autowired private DelayedTopic delayedTopicProducer;
   @Autowired private ErrorTopic errorTopicProducer;
-      @Autowired
-    private RequeueTopic requeueTopicProducer;
+  @Autowired private RequeueTopic requeueTopicProducer;
+  @Autowired private DlqTopic dlqTopicProducer;
   // 简单广播消息
   @PostMapping("send")
   public void sendMessage(@RequestParam(value = "body") String body) {
@@ -55,11 +55,19 @@ public class Controller {
     errorTopicProducer.output().send(MessageBuilder.withPayload(msg).build());
   }
 
-      // 异常重试（联机版 - 重新入列）
-    @PostMapping("requeue")
-    public void sendErrorMessageToMQ(@RequestParam(value = "body") String body) {
-        MessageBean msg = new MessageBean();
-        msg.setPayload(body);
-        requeueTopicProducer.output().send(MessageBuilder.withPayload(msg).build());
-    }
+  // 异常重试（联机版 - 重新入列）
+  @PostMapping("requeue")
+  public void sendErrorMessageToMQ(@RequestParam(value = "body") String body) {
+    MessageBean msg = new MessageBean();
+    msg.setPayload(body);
+    requeueTopicProducer.output().send(MessageBuilder.withPayload(msg).build());
+  }
+
+  // 死信队列测试
+  @PostMapping("dlq")
+  public void sendMessageToDlq(@RequestParam(value = "body") String body) {
+    MessageBean msg = new MessageBean();
+    msg.setPayload(body);
+    dlqTopicProducer.output().send(MessageBuilder.withPayload(msg).build());
+  }
 }
