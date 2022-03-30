@@ -35,6 +35,7 @@
     <module>sleuth/zipkin-server</module>
     <module>stream/stream-sample</module>
     <module>sentinel/sentinel-quick-start</module>
+    <module>sentinel/sentinel-demo-test</module>
   </modules>
 
   <dependencyManagement>

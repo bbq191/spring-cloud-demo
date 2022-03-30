@@ -20,11 +20,15 @@
         - [x] AB 模块如何追踪调用链路
         - [x] zipkin-server 集成
     - [ ] stream 示例
-      - [x] 自定义topic
-      - [x] 消费分组，消费分区
-      - [x] 延迟消息
-      - [x] 异常消息
-        - [x] 本地重试
-        - [x] 重新入队 requeue
-      - [x] 死信队列
-      - [x] Fallback 队列
+        - [x] 自定义topic
+        - [x] 消费分组，消费分区
+        - [x] 延迟消息
+        - [x] 异常消息
+            - [x] 本地重试
+            - [x] 重新入队 requeue
+        - [x] 死信队列
+        - [x] Fallback 队列
+
+- [ ] 阿里巴巴 开源组件
+    - [x] sentinel QS 示例
+    - [x] sentinel helloword 示例
