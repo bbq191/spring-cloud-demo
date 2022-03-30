@@ -34,6 +34,7 @@
     <module>sleuth/sleuth-traceB</module>
     <module>sleuth/zipkin-server</module>
     <module>stream/stream-sample</module>
+    <module>sentinel/sentinel-quick-start</module>
   </modules>
 
   <dependencyManagement>
